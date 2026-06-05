@@ -74,20 +74,16 @@ Azure SSO is entirely optional. If the three `AUTH_MICROSOFT_ENTRA_ID_*` variabl
 Build and run the container, mounting a volume to persist the SQLite database:
 
 ```bash
-docker build -t pension-tracker .
+docker build -t pensiontracker .
 
 docker run -d \
   -p 3000:3000 \
   -v pension-data:/app/data \
   -e AUTH_SECRET=<your-secret> \
-  pension-tracker
+  pensiontracker
 ```
 
-Then run migrations inside the container:
-
-```bash
-docker exec <container-id> node node_modules/.bin/drizzle-kit migrate
-```
+Database migrations run automatically on startup.
 
 ## Database
 
