@@ -148,7 +148,7 @@ try
         Task          = $Build
         BranchName    = $BranchName
         DefaultBranch = $DefaultBranch
-        ImageName     = ''
+        ImageName     = 'PensionTracker'
     }
     if ($ReleaseType)
     {

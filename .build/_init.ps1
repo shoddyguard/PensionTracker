@@ -56,7 +56,7 @@ $Global:BrownserveRepoBuildDirectory = Join-Path $global:BrownserveRepoRootDirec
 # Stores any tasks that we pass to Invoke-Build
 $Global:BrownserveRepoBuildTasksDirectory = Join-Path $global:BrownserveRepoRootDirectory -ChildPath '.build' -AdditionalChildPath 'tasks' | Convert-Path
 
-$Global:BrownserveRepoDocsDirectory = Join-Path $global:BrownserveRepoRootDirectory -ChildPath 'pages' -AdditionalChildPath 'Cmdlet reference' | Convert-Path
+
 
 # Guess the name of the repo by it's name on disk
 $Global:BrownserveRepoName = Split-Path $Global:BrownserveRepoRootDirectory -Leaf
