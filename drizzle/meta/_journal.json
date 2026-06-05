@@ -29,6 +29,13 @@
       "when": 1778365159145,
       "tag": "0003_add_users",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1780670994177,
+      "tag": "0004_add_fund_active_status",
+      "breakpoints": true
     }
   ]
 }

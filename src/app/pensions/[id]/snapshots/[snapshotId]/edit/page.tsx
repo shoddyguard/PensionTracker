@@ -18,15 +18,20 @@ export default async function EditSnapshotPage({
   const [snapshot] = await db.select().from(snapshots).where(eq(snapshots.id, snapId));
   if (!snapshot) notFound();
 
-  const [fundList, entries, contribs] = await Promise.all([
+  const [allFunds, entries, contribs] = await Promise.all([
     db
-      .select({ id: funds.id, name: funds.name })
+      .select({ id: funds.id, name: funds.name, isActive: funds.isActive })
       .from(funds)
       .where(eq(funds.pensionId, pensionId))
       .orderBy(asc(funds.name)),
     db.select().from(snapshotEntries).where(eq(snapshotEntries.snapshotId, snapId)),
     db.select().from(contributions).where(eq(contributions.snapshotId, snapId)),
   ]);
+
+  // Show active funds and any retired fund that already has an entry in this snapshot,
+  // so users can view or zero out the value on the transition snapshot.
+  const entryFundIds = new Set(entries.map((e) => e.fundId));
+  const fundList = allFunds.filter((f) => f.isActive || entryFundIds.has(f.id));
 
   const fundEntries = Object.fromEntries(
     entries.map((e) => [e.fundId, { sharesHeld: e.sharesHeld, value: e.value }])

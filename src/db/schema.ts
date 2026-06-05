@@ -24,6 +24,7 @@ export const funds = sqliteTable("funds", {
   tickerIsin: text("ticker_isin"),
   targetAllocation: real("target_allocation"),
   openingBalance: real("opening_balance"),
+  isActive: integer("is_active", { mode: "boolean" }).notNull().default(true),
 });
 
 export const snapshots = sqliteTable("snapshots", {

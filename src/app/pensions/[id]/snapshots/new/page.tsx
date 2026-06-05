@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { funds } from "@/db/schema";
-import { asc, eq } from "drizzle-orm";
+import { and, asc, eq } from "drizzle-orm";
 import Link from "next/link";
 import { createSnapshot } from "@/actions/snapshots";
 import { SnapshotForm } from "@/components/snapshots/snapshot-form";
@@ -16,7 +16,7 @@ export default async function NewSnapshotPage({
   const fundList = await db
     .select({ id: funds.id, name: funds.name })
     .from(funds)
-    .where(eq(funds.pensionId, pensionId))
+    .where(and(eq(funds.pensionId, pensionId), eq(funds.isActive, true)))
     .orderBy(asc(funds.name));
 
   const action = createSnapshot.bind(null, pensionId);

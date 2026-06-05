@@ -61,6 +61,20 @@ export async function updateFund(pensionId: number, id: number, formData: FormDa
   redirect(`/pensions/${pensionId}/funds`);
 }
 
+export async function retireFund(pensionId: number, id: number) {
+  await requireAuth();
+  await requireFundOwnership(pensionId, id);
+  await db.update(funds).set({ isActive: false }).where(eq(funds.id, id));
+  revalidatePath(`/pensions/${pensionId}/funds`);
+}
+
+export async function reactivateFund(pensionId: number, id: number) {
+  await requireAuth();
+  await requireFundOwnership(pensionId, id);
+  await db.update(funds).set({ isActive: true }).where(eq(funds.id, id));
+  revalidatePath(`/pensions/${pensionId}/funds`);
+}
+
 export async function deleteFund(pensionId: number, id: number) {
   await requireAuth();
   await requireFundOwnership(pensionId, id);
