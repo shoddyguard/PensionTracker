@@ -3,6 +3,7 @@ import { funds } from "@/db/schema";
 import { asc, eq } from "drizzle-orm";
 import Link from "next/link";
 import { DeleteFundButton } from "@/components/funds/delete-fund-button";
+import { FundStatusButton } from "@/components/funds/fund-status-button";
 
 const gbp = new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" });
 
@@ -54,8 +55,15 @@ export default async function FundsPage({
             </thead>
             <tbody className="divide-y divide-gray-100">
               {fundList.map((fund) => (
-                <tr key={fund.id} className="hover:bg-gray-50">
-                  <td className="px-4 py-3 font-medium text-gray-900">{fund.name}</td>
+                <tr key={fund.id} className={`hover:bg-gray-50 ${!fund.isActive ? "opacity-50" : ""}`}>
+                  <td className="px-4 py-3 font-medium text-gray-900">
+                    {fund.name}
+                    {!fund.isActive && (
+                      <span className="ml-2 text-xs font-medium text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded">
+                        Retired
+                      </span>
+                    )}
+                  </td>
                   <td className="px-4 py-3 text-gray-600">
                     {fund.targetAllocation != null ? `${fund.targetAllocation}%` : "-"}
                   </td>
@@ -73,6 +81,7 @@ export default async function FundsPage({
                       >
                         Edit
                       </Link>
+                      <FundStatusButton pensionId={pensionId} id={fund.id} isActive={fund.isActive} />
                       <DeleteFundButton pensionId={pensionId} id={fund.id} />
                     </div>
                   </td>

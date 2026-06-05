@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { contributions, funds, pensions, snapshotEntries, snapshots } from "@/db/schema";
-import { asc, eq, sql } from "drizzle-orm";
+import { asc, desc, eq, sql } from "drizzle-orm";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ValueChart } from "@/components/charts/value-chart";
@@ -44,7 +44,7 @@ export default async function PensionOverviewPage({
       .from(contributions)
       .innerJoin(snapshots, eq(snapshots.id, contributions.snapshotId))
       .where(eq(snapshots.pensionId, pensionId)),
-    db.select().from(funds).where(eq(funds.pensionId, pensionId)).orderBy(asc(funds.name)),
+    db.select().from(funds).where(eq(funds.pensionId, pensionId)).orderBy(desc(funds.isActive), asc(funds.name)),
   ]);
 
   const hasData = snapshotData.length > 0;
@@ -78,8 +78,8 @@ export default async function PensionOverviewPage({
     })),
   ];
 
-  // Fund breakdown from latest snapshot
-  let fundBreakdown: Array<{ id: number; name: string; value: number; targetAllocation: number | null }> =
+  // Fund breakdown from latest snapshot. Retired funds with no value are excluded to avoid clutter.
+  let fundBreakdown: Array<{ id: number; name: string; isActive: boolean; value: number; targetAllocation: number | null }> =
     [];
   if (latestSnapshot) {
     const entries = await db
@@ -88,12 +88,15 @@ export default async function PensionOverviewPage({
       .where(eq(snapshotEntries.snapshotId, latestSnapshot.id));
 
     const entryMap = Object.fromEntries(entries.map((e) => [e.fundId, e.value]));
-    fundBreakdown = fundList.map((f) => ({
-      id: f.id,
-      name: f.name,
-      value: Number(entryMap[f.id] ?? 0),
-      targetAllocation: f.targetAllocation,
-    }));
+    fundBreakdown = fundList
+      .map((f) => ({
+        id: f.id,
+        name: f.name,
+        isActive: f.isActive,
+        value: Number(entryMap[f.id] ?? 0),
+        targetAllocation: f.targetAllocation,
+      }))
+      .filter((f) => f.isActive || f.value > 0);
   }
 
   // Group contributions by snapshot
@@ -229,7 +232,14 @@ export default async function PensionOverviewPage({
                       const drift = f.targetAllocation != null ? alloc - f.targetAllocation : null;
                       return (
                         <tr key={f.id}>
-                          <td className="px-4 py-3 font-medium text-gray-900">{f.name}</td>
+                          <td className="px-4 py-3 font-medium text-gray-900">
+                            {f.name}
+                            {!f.isActive && (
+                              <span className="ml-2 text-xs font-medium text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded">
+                                Retired
+                              </span>
+                            )}
+                          </td>
                           <td className="px-4 py-3 text-right text-gray-700">{gbp.format(f.value)}</td>
                           <td className="px-4 py-3 text-right text-gray-700">{alloc.toFixed(1)}%</td>
                           {hasTargets && (
