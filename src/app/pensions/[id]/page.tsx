@@ -148,7 +148,7 @@ export default async function PensionOverviewPage({
         const capitalInflows = snapContribs
           .filter((c) => c.type !== "transfer_out")
           .reduce((sum, c) => sum + c.amount, 0);
-        yearReturnFactor *= 1 + (value - prevValue - capitalInflows) / prevValue;
+        yearReturnFactor *= 1 + (value - prevValue - capitalInflows) / (prevValue + capitalInflows);
         hasYearReturn = true;
       }
       const yearReturn = hasYearReturn ? (yearReturnFactor - 1) * 100 : null;
