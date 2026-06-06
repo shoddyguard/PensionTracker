@@ -94,7 +94,7 @@ export default async function PensionYearHistoryPage({
     const change = prevValue != null ? value - prevValue : null;
     const periodReturn =
       prevValue != null && prevValue > 0
-        ? ((value - prevValue - capitalInflows) / prevValue) * 100
+        ? ((value - prevValue - capitalInflows) / (prevValue + capitalInflows)) * 100
         : null;
 
     const hasTransferIn = snapContribs.some((c) => c.type === "transfer_in");
