@@ -21,7 +21,7 @@ export default async function PensionSettingsPage({
   return (
     <div className="space-y-8 max-w-lg">
       <div>
-        <h2 className="text-base font-semibold text-gray-900 mb-4">Details</h2>
+        <h2 className="text-base font-semibold text-gray-900 dark:text-gray-50 mb-4">Details</h2>
         <PensionForm
           action={action}
           cancelHref={`/pensions/${pensionId}`}
@@ -33,9 +33,9 @@ export default async function PensionSettingsPage({
         />
       </div>
 
-      <div className="pt-6 border-t border-gray-200">
-        <h2 className="text-base font-semibold text-gray-900 mb-2">Status</h2>
-        <p className="text-sm text-gray-500 mb-3">
+      <div className="pt-6 border-t border-gray-200 dark:border-gray-700">
+        <h2 className="text-base font-semibold text-gray-900 dark:text-gray-50 mb-2">Status</h2>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
           {pension.status === "active"
             ? "This pension is active. Closing it will hide it from active tracking but preserve all historical data."
             : "This pension is closed. You can reopen it at any time."}

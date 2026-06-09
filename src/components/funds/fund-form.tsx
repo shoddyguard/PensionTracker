@@ -20,7 +20,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="px-4 py-2 bg-gray-900 text-white text-sm rounded-md hover:bg-gray-700 disabled:opacity-50"
+      className="px-4 py-2 bg-gray-900 text-white text-sm rounded-md hover:bg-gray-700 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-200 disabled:opacity-50"
     >
       {pending ? "Saving..." : "Save Fund"}
     </button>
@@ -31,7 +31,7 @@ export function FundForm({ action, cancelHref, defaultValues }: FundFormProps) {
   return (
     <form action={action} className="space-y-5 max-w-md">
       <div className="space-y-1">
-        <label className="block text-sm font-medium text-gray-700" htmlFor="name">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300" htmlFor="name">
           Name <span className="text-red-500">*</span>
         </label>
         <input
@@ -39,12 +39,12 @@ export function FundForm({ action, cancelHref, defaultValues }: FundFormProps) {
           name="name"
           required
           defaultValue={defaultValues?.name ?? ""}
-          className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900"
+          className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-gray-300"
         />
       </div>
 
       <div className="space-y-1">
-        <label className="block text-sm font-medium text-gray-700" htmlFor="targetAllocation">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300" htmlFor="targetAllocation">
           Target Allocation (%)
         </label>
         <input
@@ -56,13 +56,13 @@ export function FundForm({ action, cancelHref, defaultValues }: FundFormProps) {
           step="0.01"
           defaultValue={defaultValues?.targetAllocation ?? ""}
           placeholder="e.g. 60"
-          className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900"
+          className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-gray-300"
         />
-        <p className="text-xs text-gray-500">Optional. When set, enables the rebalancing indicator.</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400">Optional. When set, enables the rebalancing indicator.</p>
       </div>
 
       <div className="space-y-1">
-        <label className="block text-sm font-medium text-gray-700" htmlFor="tickerIsin">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300" htmlFor="tickerIsin">
           Ticker / ISIN
         </label>
         <input
@@ -70,17 +70,17 @@ export function FundForm({ action, cancelHref, defaultValues }: FundFormProps) {
           name="tickerIsin"
           defaultValue={defaultValues?.tickerIsin ?? ""}
           placeholder="e.g. GB00B3X7QG63"
-          className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900"
+          className="w-full border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-900 dark:focus:ring-gray-300"
         />
-        <p className="text-xs text-gray-500">Optional. For future API integration.</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400">Optional. For future API integration.</p>
       </div>
 
       <div className="space-y-1">
-        <label className="block text-sm font-medium text-gray-700" htmlFor="openingBalance">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300" htmlFor="openingBalance">
           Opening Balance
         </label>
-        <div className="flex items-center border border-gray-300 rounded-md px-3 py-2 text-sm focus-within:ring-2 focus-within:ring-gray-900">
-          <span className="text-gray-500 mr-1 select-none">£</span>
+        <div className="flex items-center border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 text-sm bg-white dark:bg-gray-800 focus-within:ring-2 focus-within:ring-gray-900 dark:focus-within:ring-gray-300">
+          <span className="text-gray-500 dark:text-gray-400 mr-1 select-none">£</span>
           <input
             id="openingBalance"
             name="openingBalance"
@@ -89,17 +89,17 @@ export function FundForm({ action, cancelHref, defaultValues }: FundFormProps) {
             step="0.01"
             defaultValue={defaultValues?.openingBalance ?? ""}
             placeholder="0.00"
-            className="flex-1 outline-none bg-transparent"
+            className="flex-1 outline-none bg-transparent text-gray-900 dark:text-gray-100"
           />
         </div>
-        <p className="text-xs text-gray-500">Optional. The value of this fund when you started tracking.</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400">Optional. The value of this fund when you started tracking.</p>
       </div>
 
       <div className="flex gap-3 pt-2">
         <SubmitButton />
         <Link
           href={cancelHref}
-          className="px-4 py-2 text-sm text-gray-600 hover:text-gray-900"
+          className="px-4 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
         >
           Cancel
         </Link>

@@ -26,7 +26,7 @@ export function FundStatusButton({
           }
         }}
       >
-        <button type="submit" className="text-sm text-amber-600 hover:text-amber-800">
+        <button type="submit" className="text-sm text-amber-600 hover:text-amber-800 dark:text-amber-400 dark:hover:text-amber-300">
           Retire
         </button>
       </form>
@@ -36,7 +36,7 @@ export function FundStatusButton({
   const action = reactivateFund.bind(null, pensionId, id);
   return (
     <form action={action}>
-      <button type="submit" className="text-sm text-gray-600 hover:text-gray-900">
+      <button type="submit" className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
         Reactivate
       </button>
     </form>

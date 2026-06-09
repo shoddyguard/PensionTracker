@@ -13,7 +13,7 @@ export function DeleteSnapshotButton({ pensionId, id }: { pensionId: number; id:
         }
       }}
     >
-      <button type="submit" className="text-sm text-red-600 hover:text-red-800">
+      <button type="submit" className="text-sm text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300">
         Delete
       </button>
     </form>

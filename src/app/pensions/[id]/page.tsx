@@ -165,97 +165,97 @@ export default async function PensionOverviewPage({
         <>
           {/* Summary cards */}
           <div className="grid grid-cols-4 gap-4">
-            <div className="bg-white border border-gray-200 rounded-lg p-4">
-              <p className="text-xs text-gray-500 mb-1">Current Value</p>
-              <p className="text-2xl font-semibold text-gray-900">{gbp.format(currentValue)}</p>
+            <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Current Value</p>
+              <p className="text-2xl font-semibold text-gray-900 dark:text-gray-50">{gbp.format(currentValue)}</p>
             </div>
-            <div className="bg-white border border-gray-200 rounded-lg p-4">
-              <p className="text-xs text-gray-500 mb-1">Net Invested</p>
-              <p className="text-2xl font-semibold text-gray-900">{gbp.format(invested)}</p>
+            <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Net Invested</p>
+              <p className="text-2xl font-semibold text-gray-900 dark:text-gray-50">{gbp.format(invested)}</p>
             </div>
-            <div className="bg-white border border-gray-200 rounded-lg p-4">
-              <p className="text-xs text-gray-500 mb-1">Total Return</p>
+            <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Total Return</p>
               <p
                 className={`text-2xl font-semibold ${
-                  returnPct == null ? "text-gray-900" : returnPct >= 0 ? "text-green-600" : "text-red-600"
+                  returnPct == null ? "text-gray-900 dark:text-gray-50" : returnPct >= 0 ? "text-green-600" : "text-red-600"
                 }`}
               >
                 {formatPct(returnPct) ?? "N/A"}
               </p>
               {returnGbp != null && (
-                <p className="text-xs text-gray-400 mt-0.5">{gbp.format(returnGbp)}</p>
+                <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{gbp.format(returnGbp)}</p>
               )}
             </div>
-            <div className="bg-white border border-gray-200 rounded-lg p-4">
-              <p className="text-xs text-gray-500 mb-1">Annualized Return</p>
+            <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Annualized Return</p>
               <p
                 className={`text-2xl font-semibold ${
-                  annReturn == null ? "text-gray-400" : annReturn >= 0 ? "text-green-600" : "text-red-600"
+                  annReturn == null ? "text-gray-400 dark:text-gray-600" : annReturn >= 0 ? "text-green-600" : "text-red-600"
                 }`}
               >
                 {formatPct(annReturn) ?? "-"}
               </p>
               {annReturn == null && snapshotData.length === 1 && (
-                <p className="text-xs text-gray-400 mt-0.5">Need more snapshots</p>
+                <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">Need more snapshots</p>
               )}
             </div>
           </div>
 
           {/* Chart */}
-          <div className="bg-white border border-gray-200 rounded-lg p-4">
-            <h2 className="text-sm font-medium text-gray-700 mb-4">Value Over Time</h2>
+          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+            <h2 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">Value Over Time</h2>
             <ValueChart data={chartData} />
           </div>
 
           {/* Fund breakdown */}
           {fundBreakdown.length > 0 && (
             <div>
-              <h2 className="text-base font-semibold text-gray-900 mb-3">Fund Breakdown</h2>
-              <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+              <h2 className="text-base font-semibold text-gray-900 dark:text-gray-50 mb-3">Fund Breakdown</h2>
+              <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
                 <table className="w-full text-sm">
-                  <thead className="bg-gray-50 border-b border-gray-200">
+                  <thead className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                     <tr>
-                      <th className="text-left px-4 py-3 font-medium text-gray-600">Fund</th>
-                      <th className="text-right px-4 py-3 font-medium text-gray-600">Value</th>
-                      <th className="text-right px-4 py-3 font-medium text-gray-600">Allocation</th>
+                      <th className="text-left px-4 py-3 font-medium text-gray-600 dark:text-gray-400">Fund</th>
+                      <th className="text-right px-4 py-3 font-medium text-gray-600 dark:text-gray-400">Value</th>
+                      <th className="text-right px-4 py-3 font-medium text-gray-600 dark:text-gray-400">Allocation</th>
                       {hasTargets && (
                         <>
-                          <th className="text-right px-4 py-3 font-medium text-gray-600">Target</th>
-                          <th className="text-right px-4 py-3 font-medium text-gray-600">Drift</th>
+                          <th className="text-right px-4 py-3 font-medium text-gray-600 dark:text-gray-400">Target</th>
+                          <th className="text-right px-4 py-3 font-medium text-gray-600 dark:text-gray-400">Drift</th>
                         </>
                       )}
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-100">
+                  <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
                     {fundBreakdown.map((f) => {
                       const alloc = currentValue > 0 ? (f.value / currentValue) * 100 : 0;
                       const drift = f.targetAllocation != null ? alloc - f.targetAllocation : null;
                       return (
                         <tr key={f.id}>
-                          <td className="px-4 py-3 font-medium text-gray-900">
+                          <td className="px-4 py-3 font-medium text-gray-900 dark:text-gray-100">
                             {f.name}
                             {!f.isActive && (
-                              <span className="ml-2 text-xs font-medium text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded">
+                              <span className="ml-2 text-xs font-medium text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">
                                 Retired
                               </span>
                             )}
                           </td>
-                          <td className="px-4 py-3 text-right text-gray-700">{gbp.format(f.value)}</td>
-                          <td className="px-4 py-3 text-right text-gray-700">{alloc.toFixed(1)}%</td>
+                          <td className="px-4 py-3 text-right text-gray-700 dark:text-gray-300">{gbp.format(f.value)}</td>
+                          <td className="px-4 py-3 text-right text-gray-700 dark:text-gray-300">{alloc.toFixed(1)}%</td>
                           {hasTargets && (
                             <>
-                              <td className="px-4 py-3 text-right text-gray-500">
+                              <td className="px-4 py-3 text-right text-gray-500 dark:text-gray-400">
                                 {f.targetAllocation != null ? `${f.targetAllocation}%` : "-"}
                               </td>
                               <td
                                 className={`px-4 py-3 text-right font-medium ${
                                   drift == null
-                                    ? "text-gray-400"
+                                    ? "text-gray-400 dark:text-gray-600"
                                     : Math.abs(drift) > 5
                                     ? drift > 0
                                       ? "text-orange-600"
                                       : "text-blue-600"
-                                    : "text-gray-600"
+                                    : "text-gray-600 dark:text-gray-400"
                                 }`}
                               >
                                 {drift == null ? "-" : `${drift > 0 ? "+" : ""}${drift.toFixed(1)}%`}
@@ -274,23 +274,23 @@ export default async function PensionOverviewPage({
           {/* Year summary */}
           {yearSummary.length > 0 && (
             <div>
-              <h2 className="text-base font-semibold text-gray-900 mb-3">History</h2>
-              <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+              <h2 className="text-base font-semibold text-gray-900 dark:text-gray-50 mb-3">History</h2>
+              <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
                 <table className="w-full text-sm">
-                  <thead className="bg-gray-50 border-b border-gray-200">
+                  <thead className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                     <tr>
-                      <th className="text-left px-4 py-3 font-medium text-gray-600">Year</th>
-                      <th className="text-right px-4 py-3 font-medium text-gray-600">Opening</th>
-                      <th className="text-right px-4 py-3 font-medium text-gray-600">Closing</th>
-                      <th className="text-right px-4 py-3 font-medium text-gray-600">Contributions</th>
-                      <th className="text-right px-4 py-3 font-medium text-gray-600">Return</th>
+                      <th className="text-left px-4 py-3 font-medium text-gray-600 dark:text-gray-400">Year</th>
+                      <th className="text-right px-4 py-3 font-medium text-gray-600 dark:text-gray-400">Opening</th>
+                      <th className="text-right px-4 py-3 font-medium text-gray-600 dark:text-gray-400">Closing</th>
+                      <th className="text-right px-4 py-3 font-medium text-gray-600 dark:text-gray-400">Contributions</th>
+                      <th className="text-right px-4 py-3 font-medium text-gray-600 dark:text-gray-400">Return</th>
                       <th className="px-4 py-3" />
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-100">
+                  <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
                     {yearSummary.map((row) => (
-                      <tr key={row.year} className="hover:bg-gray-50">
-                        <td className="px-4 py-3 font-medium text-gray-900">
+                      <tr key={row.year} className="hover:bg-gray-50 dark:hover:bg-gray-800">
+                        <td className="px-4 py-3 font-medium text-gray-900 dark:text-gray-100">
                           {row.year}
                           {row.hasTransferIn && (
                             <span className="ml-2 text-xs font-medium text-green-600">↑ transfer in</span>
@@ -299,21 +299,21 @@ export default async function PensionOverviewPage({
                             <span className="ml-2 text-xs font-medium text-amber-600">↓ transfer out</span>
                           )}
                         </td>
-                        <td className="px-4 py-3 text-right text-gray-600">
-                          {row.openingValue > 0 ? gbp.format(row.openingValue) : <span className="text-gray-300">-</span>}
+                        <td className="px-4 py-3 text-right text-gray-600 dark:text-gray-400">
+                          {row.openingValue > 0 ? gbp.format(row.openingValue) : <span className="text-gray-300 dark:text-gray-600">-</span>}
                         </td>
-                        <td className="px-4 py-3 text-right text-gray-900">{gbp.format(row.closingValue)}</td>
-                        <td className="px-4 py-3 text-right text-gray-500">
+                        <td className="px-4 py-3 text-right text-gray-900 dark:text-gray-100">{gbp.format(row.closingValue)}</td>
+                        <td className="px-4 py-3 text-right text-gray-500 dark:text-gray-400">
                           {row.regularContribs > 0 ? (
                             gbp.format(row.regularContribs)
                           ) : (
-                            <span className="text-gray-300">-</span>
+                            <span className="text-gray-300 dark:text-gray-600">-</span>
                           )}
                         </td>
                         <td
                           className={`px-4 py-3 text-right font-medium ${
                             row.yearReturn == null
-                              ? "text-gray-300"
+                              ? "text-gray-300 dark:text-gray-600"
                               : row.yearReturn >= 0
                               ? "text-green-600"
                               : "text-red-600"
@@ -324,7 +324,7 @@ export default async function PensionOverviewPage({
                         <td className="px-4 py-3 text-right">
                           <Link
                             href={`/pensions/${pensionId}/history/${row.year}`}
-                            className="text-sm text-gray-600 hover:text-gray-900"
+                            className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
                           >
                             View →
                           </Link>
@@ -334,18 +334,18 @@ export default async function PensionOverviewPage({
                   </tbody>
                 </table>
               </div>
-              <p className="text-xs text-gray-400 mt-2">
+              <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
                 Return excludes contributions and transfers - it reflects market performance only.
               </p>
             </div>
           )}
         </>
       ) : (
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-gray-500 dark:text-gray-400">
           No snapshots yet.{" "}
           <Link
             href={`/pensions/${pensionId}/snapshots/new`}
-            className="underline hover:text-gray-900"
+            className="underline hover:text-gray-900 dark:hover:text-gray-50"
           >
             Add your first snapshot
           </Link>{" "}

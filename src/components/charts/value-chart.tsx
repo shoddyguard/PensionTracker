@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import {
   CartesianGrid,
   Line,
@@ -20,22 +21,43 @@ const gbp = new Intl.NumberFormat("en-GB", {
   maximumFractionDigits: 0,
 });
 
+function useIsDark() {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const update = () => setIsDark(document.documentElement.classList.contains("dark"));
+    update();
+
+    const observer = new MutationObserver(update);
+    observer.observe(document.documentElement, { attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
+
+  return isDark;
+}
+
 export function ValueChart({ data }: Props) {
+  const isDark = useIsDark();
+
   if (data.length < 2) {
     return (
-      <p className="text-sm text-gray-400 text-center py-10">
+      <p className="text-sm text-gray-400 dark:text-gray-500 text-center py-10">
         Not enough snapshots to display a chart.
       </p>
     );
   }
 
+  const gridColor = isDark ? "#374151" : "#f3f4f6";
+  const tickColor = isDark ? "#6b7280" : "#9ca3af";
+  const lineColor = isDark ? "#e5e7eb" : "#111827";
+
   return (
     <ResponsiveContainer width="100%" height={240}>
       <LineChart data={data} margin={{ top: 4, right: 4, bottom: 0, left: 4 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#f3f4f6" />
+        <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
         <XAxis
           dataKey="date"
-          tick={{ fontSize: 11, fill: "#9ca3af" }}
+          tick={{ fontSize: 11, fill: tickColor }}
           tickFormatter={(v) =>
             new Date(v + "T12:00:00").toLocaleDateString("en-GB", {
               month: "short",
@@ -44,7 +66,7 @@ export function ValueChart({ data }: Props) {
           }
         />
         <YAxis
-          tick={{ fontSize: 11, fill: "#9ca3af" }}
+          tick={{ fontSize: 11, fill: tickColor }}
           tickFormatter={(v) => gbp.format(v)}
           width={80}
         />
@@ -57,13 +79,14 @@ export function ValueChart({ data }: Props) {
               year: "numeric",
             })
           }
+          contentStyle={isDark ? { backgroundColor: "#1f2937", border: "1px solid #374151", color: "#f9fafb" } : undefined}
         />
         <Line
           type="monotone"
           dataKey="value"
-          stroke="#111827"
+          stroke={lineColor}
           strokeWidth={2}
-          dot={{ r: 3, fill: "#111827" }}
+          dot={{ r: 3, fill: lineColor }}
           activeDot={{ r: 5 }}
         />
       </LineChart>

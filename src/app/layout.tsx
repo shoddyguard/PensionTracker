@@ -19,6 +19,8 @@ export const metadata: Metadata = {
   description: "Track your pension investment performance over time.",
 };
 
+const themeScript = `(function(){var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark')}})()`;
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -32,8 +34,11 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50`}>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 dark:bg-gray-950`}>
         {session && <Nav username={session.user?.name ?? null} signOutAction={handleSignOut} />}
         <main className="mx-auto max-w-5xl px-4 py-8">
           {children}
