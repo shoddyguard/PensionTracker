@@ -117,35 +117,35 @@ export default async function PensionYearHistoryPage({
   return (
     <div className="space-y-6">
       {/* Back link */}
-      <Link href={`/pensions/${pensionId}`} className="text-sm text-gray-500 hover:text-gray-900">
+      <Link href={`/pensions/${pensionId}`} className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
         ← Back to {pension.name}
       </Link>
 
-      <h1 className="text-xl font-bold text-gray-900">{year}</h1>
+      <h1 className="text-xl font-bold text-gray-900 dark:text-gray-50">{year}</h1>
 
       {/* Summary cards */}
       <div className="grid grid-cols-4 gap-4">
-        <div className="bg-white border border-gray-200 rounded-lg p-4">
-          <p className="text-xs text-gray-500 mb-1">Opening Value</p>
-          <p className="text-xl font-semibold text-gray-900">
-            {openingValue > 0 ? gbp.format(openingValue) : <span className="text-gray-400">-</span>}
+        <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+          <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Opening Value</p>
+          <p className="text-xl font-semibold text-gray-900 dark:text-gray-50">
+            {openingValue > 0 ? gbp.format(openingValue) : <span className="text-gray-400 dark:text-gray-600">-</span>}
           </p>
         </div>
-        <div className="bg-white border border-gray-200 rounded-lg p-4">
-          <p className="text-xs text-gray-500 mb-1">Closing Value</p>
-          <p className="text-xl font-semibold text-gray-900">{gbp.format(closingValue)}</p>
+        <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+          <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Closing Value</p>
+          <p className="text-xl font-semibold text-gray-900 dark:text-gray-50">{gbp.format(closingValue)}</p>
         </div>
-        <div className="bg-white border border-gray-200 rounded-lg p-4">
-          <p className="text-xs text-gray-500 mb-1">Contributions</p>
-          <p className="text-xl font-semibold text-gray-900">
-            {totalContribs > 0 ? gbp.format(totalContribs) : <span className="text-gray-400">-</span>}
+        <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+          <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Contributions</p>
+          <p className="text-xl font-semibold text-gray-900 dark:text-gray-50">
+            {totalContribs > 0 ? gbp.format(totalContribs) : <span className="text-gray-400 dark:text-gray-600">-</span>}
           </p>
         </div>
-        <div className="bg-white border border-gray-200 rounded-lg p-4">
-          <p className="text-xs text-gray-500 mb-1">Year Return</p>
+        <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+          <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Year Return</p>
           <p
             className={`text-xl font-semibold ${
-              yearReturn == null ? "text-gray-400" : yearReturn >= 0 ? "text-green-600" : "text-red-600"
+              yearReturn == null ? "text-gray-400 dark:text-gray-600" : yearReturn >= 0 ? "text-green-600" : "text-red-600"
             }`}
           >
             {yearReturn == null ? "-" : formatPct(yearReturn)}
@@ -155,22 +155,22 @@ export default async function PensionYearHistoryPage({
 
       {/* Period detail table */}
       <div>
-        <h2 className="text-base font-semibold text-gray-900 mb-3">Snapshots</h2>
-        <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+        <h2 className="text-base font-semibold text-gray-900 dark:text-gray-50 mb-3">Snapshots</h2>
+        <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
           <table className="w-full text-sm">
-            <thead className="bg-gray-50 border-b border-gray-200">
+            <thead className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
               <tr>
-                <th className="text-left px-4 py-3 font-medium text-gray-600">Date</th>
-                <th className="text-right px-4 py-3 font-medium text-gray-600">Value</th>
-                <th className="text-right px-4 py-3 font-medium text-gray-600">Contributions</th>
-                <th className="text-right px-4 py-3 font-medium text-gray-600">Change</th>
-                <th className="text-right px-4 py-3 font-medium text-gray-600">Period Return</th>
+                <th className="text-left px-4 py-3 font-medium text-gray-600 dark:text-gray-400">Date</th>
+                <th className="text-right px-4 py-3 font-medium text-gray-600 dark:text-gray-400">Value</th>
+                <th className="text-right px-4 py-3 font-medium text-gray-600 dark:text-gray-400">Contributions</th>
+                <th className="text-right px-4 py-3 font-medium text-gray-600 dark:text-gray-400">Change</th>
+                <th className="text-right px-4 py-3 font-medium text-gray-600 dark:text-gray-400">Period Return</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
               {periodRows.map((row, i) => (
-                <tr key={i} className="hover:bg-gray-50">
-                  <td className="px-4 py-3 text-gray-900">
+                <tr key={i} className="hover:bg-gray-50 dark:hover:bg-gray-800">
+                  <td className="px-4 py-3 text-gray-900 dark:text-gray-100">
                     {row.date.toLocaleDateString("en-GB", {
                       day: "numeric",
                       month: "short",
@@ -183,17 +183,17 @@ export default async function PensionYearHistoryPage({
                       <span className="ml-2 text-xs font-medium text-amber-600">↓ transfer out</span>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-right text-gray-900">{gbp.format(row.value)}</td>
-                  <td className="px-4 py-3 text-right text-gray-500">
+                  <td className="px-4 py-3 text-right text-gray-900 dark:text-gray-100">{gbp.format(row.value)}</td>
+                  <td className="px-4 py-3 text-right text-gray-500 dark:text-gray-400">
                     {row.regularContrib > 0 ? (
                       gbp.format(row.regularContrib)
                     ) : (
-                      <span className="text-gray-300">-</span>
+                      <span className="text-gray-300 dark:text-gray-600">-</span>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-right text-gray-700">
+                  <td className="px-4 py-3 text-right text-gray-700 dark:text-gray-300">
                     {row.change == null ? (
-                      <span className="text-gray-300">-</span>
+                      <span className="text-gray-300 dark:text-gray-600">-</span>
                     ) : (
                       gbpChange.format(row.change)
                     )}
@@ -201,7 +201,7 @@ export default async function PensionYearHistoryPage({
                   <td
                     className={`px-4 py-3 text-right font-medium ${
                       row.periodReturn == null
-                        ? "text-gray-300"
+                        ? "text-gray-300 dark:text-gray-600"
                         : row.periodReturn >= 0
                         ? "text-green-600"
                         : "text-red-600"
@@ -214,7 +214,7 @@ export default async function PensionYearHistoryPage({
             </tbody>
           </table>
         </div>
-        <p className="text-xs text-gray-400 mt-2">
+        <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
           Period Return excludes contributions and transfers - it reflects market performance only.
         </p>
       </div>

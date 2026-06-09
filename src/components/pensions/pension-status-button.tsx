@@ -20,7 +20,7 @@ export function PensionStatusButton({
           }
         }}
       >
-        <button type="submit" className="text-sm text-red-600 hover:text-red-800">
+        <button type="submit" className="text-sm text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300">
           Close Pension
         </button>
       </form>
@@ -30,7 +30,7 @@ export function PensionStatusButton({
   const action = reopenPension.bind(null, id);
   return (
     <form action={action}>
-      <button type="submit" className="text-sm text-gray-600 hover:text-gray-900">
+      <button type="submit" className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100">
         Reopen Pension
       </button>
     </form>

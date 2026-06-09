@@ -93,10 +93,10 @@ export default async function PensionsPage() {
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-50">Dashboard</h1>
         <Link
           href="/pensions/new"
-          className="px-4 py-2 bg-gray-900 text-white text-sm rounded-md hover:bg-gray-700"
+          className="px-4 py-2 bg-gray-900 text-white text-sm rounded-md hover:bg-gray-700 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-200"
         >
           Add Pension
         </Link>
@@ -105,60 +105,60 @@ export default async function PensionsPage() {
       {hasAnyData && (
         <>
           <div className="grid grid-cols-3 gap-4">
-            <div className="bg-white border border-gray-200 rounded-lg p-4">
-              <p className="text-xs text-gray-500 mb-1">Total Portfolio Value</p>
-              <p className="text-2xl font-semibold text-gray-900">{gbp.format(currentTotalValue)}</p>
+            <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Total Portfolio Value</p>
+              <p className="text-2xl font-semibold text-gray-900 dark:text-gray-50">{gbp.format(currentTotalValue)}</p>
             </div>
-            <div className="bg-white border border-gray-200 rounded-lg p-4">
-              <p className="text-xs text-gray-500 mb-1">Total Return</p>
+            <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Total Return</p>
               <p
                 className={`text-2xl font-semibold ${
-                  returnPct == null ? "text-gray-900" : returnPct >= 0 ? "text-green-600" : "text-red-600"
+                  returnPct == null ? "text-gray-900 dark:text-gray-50" : returnPct >= 0 ? "text-green-600" : "text-red-600"
                 }`}
               >
                 {formatPct(returnPct) ?? "N/A"}
               </p>
               {returnGbp != null && (
-                <p className="text-xs text-gray-400 mt-0.5">{gbp.format(returnGbp)}</p>
+                <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">{gbp.format(returnGbp)}</p>
               )}
             </div>
-            <div className="bg-white border border-gray-200 rounded-lg p-4">
-              <p className="text-xs text-gray-500 mb-1">Net Invested</p>
-              <p className="text-2xl font-semibold text-gray-900">{gbp.format(invested)}</p>
+            <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Net Invested</p>
+              <p className="text-2xl font-semibold text-gray-900 dark:text-gray-50">{gbp.format(invested)}</p>
             </div>
           </div>
 
-          <div className="bg-white border border-gray-200 rounded-lg p-4">
-            <h2 className="text-sm font-medium text-gray-700 mb-4">Portfolio Value (last 5 years)</h2>
+          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+            <h2 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-4">Portfolio Value (last 5 years)</h2>
             <ValueChart data={chartData} />
           </div>
         </>
       )}
 
       <div>
-        <h2 className="text-base font-semibold text-gray-900 mb-3">Pensions</h2>
+        <h2 className="text-base font-semibold text-gray-900 dark:text-gray-50 mb-3">Pensions</h2>
         {pensionList.length === 0 ? (
-          <p className="text-gray-500 text-sm">
+          <p className="text-gray-500 dark:text-gray-400 text-sm">
             No pensions yet.{" "}
-            <Link href="/pensions/new" className="underline hover:text-gray-900">
+            <Link href="/pensions/new" className="underline hover:text-gray-900 dark:hover:text-gray-50">
               Add your first pension
             </Link>{" "}
             to get started.
           </p>
         ) : (
-          <div className="bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
             <table className="w-full text-sm">
-              <thead className="bg-gray-50 border-b border-gray-200">
+              <thead className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                 <tr>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Name</th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Provider</th>
-                  <th className="text-right px-4 py-3 font-medium text-gray-600">Current Value</th>
-                  <th className="text-right px-4 py-3 font-medium text-gray-600">Return</th>
-                  <th className="text-left px-4 py-3 font-medium text-gray-600">Status</th>
+                  <th className="text-left px-4 py-3 font-medium text-gray-600 dark:text-gray-400">Name</th>
+                  <th className="text-left px-4 py-3 font-medium text-gray-600 dark:text-gray-400">Provider</th>
+                  <th className="text-right px-4 py-3 font-medium text-gray-600 dark:text-gray-400">Current Value</th>
+                  <th className="text-right px-4 py-3 font-medium text-gray-600 dark:text-gray-400">Return</th>
+                  <th className="text-left px-4 py-3 font-medium text-gray-600 dark:text-gray-400">Status</th>
                   <th className="px-4 py-3" />
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
                 {pensionList.map((pension) => {
                   const latest = latestByPension[pension.id];
                   const value = latest?.value ?? null;
@@ -166,15 +166,15 @@ export default async function PensionsPage() {
                   const pInvested = netInvestedIn(pContribs) + (obByPension[pension.id] ?? 0);
                   const pReturn = value != null ? totalReturnPercent(value, pInvested) : null;
                   return (
-                    <tr key={pension.id} className="hover:bg-gray-50">
-                      <td className="px-4 py-3 font-medium text-gray-900">
+                    <tr key={pension.id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
+                      <td className="px-4 py-3 font-medium text-gray-900 dark:text-gray-100">
                         <Link href={`/pensions/${pension.id}`} className="hover:underline">
                           {pension.name}
                         </Link>
                       </td>
-                      <td className="px-4 py-3 text-gray-600">{pension.provider}</td>
-                      <td className="px-4 py-3 text-right text-gray-900">
-                        {value != null ? gbp.format(value) : <span className="text-gray-400">-</span>}
+                      <td className="px-4 py-3 text-gray-600 dark:text-gray-400">{pension.provider}</td>
+                      <td className="px-4 py-3 text-right text-gray-900 dark:text-gray-100">
+                        {value != null ? gbp.format(value) : <span className="text-gray-400 dark:text-gray-600">-</span>}
                       </td>
                       <td
                         className={`px-4 py-3 text-right font-medium ${
@@ -184,16 +184,16 @@ export default async function PensionsPage() {
                         {pReturn != null ? (
                           formatPct(pReturn)
                         ) : (
-                          <span className="text-gray-400 font-normal">-</span>
+                          <span className="text-gray-400 dark:text-gray-600 font-normal">-</span>
                         )}
                       </td>
                       <td className="px-4 py-3">
                         {pension.status === "active" ? (
-                          <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
+                          <span className="text-xs bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 px-2 py-0.5 rounded-full">
                             Active
                           </span>
                         ) : (
-                          <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">
+                          <span className="text-xs bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400 px-2 py-0.5 rounded-full">
                             Closed
                           </span>
                         )}
@@ -201,7 +201,7 @@ export default async function PensionsPage() {
                       <td className="px-4 py-3 text-right">
                         <Link
                           href={`/pensions/${pension.id}`}
-                          className="text-sm text-gray-600 hover:text-gray-900"
+                          className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
                         >
                           View →
                         </Link>

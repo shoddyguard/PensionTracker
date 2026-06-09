@@ -21,13 +21,13 @@ export default async function PensionLayout({
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between pb-4 border-b border-gray-200">
+      <div className="flex items-center justify-between pb-4 border-b border-gray-200 dark:border-gray-700">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-gray-900">{pension.name}</span>
-            <span className="text-sm text-gray-500">{pension.provider}</span>
+            <span className="font-semibold text-gray-900 dark:text-gray-50">{pension.name}</span>
+            <span className="text-sm text-gray-500 dark:text-gray-400">{pension.provider}</span>
             {pension.status === "closed" && (
-              <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">
+              <span className="text-xs bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400 px-2 py-0.5 rounded-full">
                 Closed
               </span>
             )}

@@ -23,8 +23,8 @@ export function PensionSubNav({ pensionId }: { pensionId: number }) {
           className={`text-sm transition-colors ${
             pathname === link.href ||
             (link.href !== base && pathname.startsWith(link.href))
-              ? "font-medium text-gray-900"
-              : "text-gray-500 hover:text-gray-900"
+              ? "font-medium text-gray-900 dark:text-gray-50"
+              : "text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
           }`}
         >
           {link.label}

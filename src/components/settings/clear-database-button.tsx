@@ -25,7 +25,7 @@ export function ClearDatabaseButton() {
       <button
         type="button"
         onClick={() => setConfirming(true)}
-        className="px-4 py-2 border border-red-300 text-red-600 text-sm rounded-md hover:bg-red-50"
+        className="px-4 py-2 border border-red-300 dark:border-red-700 text-red-600 dark:text-red-400 text-sm rounded-md hover:bg-red-50 dark:hover:bg-red-900/20"
       >
         Clear all data
       </button>
@@ -33,8 +33,8 @@ export function ClearDatabaseButton() {
   }
 
   return (
-    <div className="rounded-lg border border-red-200 bg-red-50 p-4 space-y-3">
-      <p className="text-sm text-red-800 font-medium">
+    <div className="rounded-lg border border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20 p-4 space-y-3">
+      <p className="text-sm text-red-800 dark:text-red-300 font-medium">
         This will permanently delete all pensions, funds, snapshots, and contributions. This cannot be undone.
       </p>
       <div className="flex gap-3">
@@ -44,7 +44,7 @@ export function ClearDatabaseButton() {
         <button
           type="button"
           onClick={() => setConfirming(false)}
-          className="px-4 py-2 text-sm text-gray-600 hover:text-gray-900"
+          className="px-4 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100"
         >
           Cancel
         </button>
