@@ -55,6 +55,8 @@ $Global:BrownserveRepoRootDirectory = (Resolve-Path (Get-Item $PSScriptRoot -For
 $Global:BrownserveRepoBuildDirectory = Join-Path $global:BrownserveRepoRootDirectory -ChildPath '.build' | Convert-Path
 # Stores any tasks that we pass to Invoke-Build
 $Global:BrownserveRepoBuildTasksDirectory = Join-Path $global:BrownserveRepoRootDirectory -ChildPath '.build' -AdditionalChildPath 'tasks' | Convert-Path
+# Stores any tests that we pass to Pester
+$Global:BrownserveRepoTestsDirectory = Join-Path $global:BrownserveRepoRootDirectory -ChildPath '.build' -AdditionalChildPath 'tests' | Convert-Path
 
 
 
